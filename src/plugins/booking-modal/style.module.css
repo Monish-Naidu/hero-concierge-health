@@ -1,0 +1,22 @@
+/* styles.module.css */
+.customScrollbar::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    display: none;
+}
+
+.customScrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
