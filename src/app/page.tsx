@@ -1,13 +1,13 @@
 'use client';
 
 import { Loader } from '@/components/loader/Loader';
-import { AboutSection, ChooseUs, HeroSection } from '@/sections';
+import { AboutSection, HeroSection } from '@/sections';
 import { Contact } from '@/sections/contact/contact';
+import { CareApproach } from '@/sections/care-approach/care-approach';
 import { Differentiator } from '@/sections/differentiator/differentiator';
 import { HowItWorks } from '@/sections/how-it-works/how-it-works';
 import { FeaturedServices } from '@/sections/featured-services/featured-services';
 import { MembershipTeaser } from '@/sections/membership-teaser/membership-teaser';
-import UnlockPower from '@/sections/unlock-power-slider/unlock-power';
 import { useEffect, useState } from 'react';
 import { structureData } from '@/data/structure';
 
@@ -56,7 +56,6 @@ export default function Home() {
 
   const hero = homeData?.hero;
   const aboutUsData = getDataSectionById('membership-signup');
-  const chooseUsData = getDataSectionById('why-choose-us');
   const featuredServicesDataRaw = getDataSectionById('unlock-power');
   const contactData = getDataSectionById('new-location');
   const footerData = getDataSectionById('footer');
@@ -280,11 +279,9 @@ export default function Home() {
           />
         </section>
 
-        {chooseUsData && chooseUsData.title ? (
-          <section id="why-choose" className="mb-12 flex flex-col gap-8 sm:mb-16 md:mb-20 lg:mb-[70px] mt-8 sm:mt-14 lg:mt-28">
-            <UnlockPower unlockPowerData={chooseUsData as any} />
+        <section id="how-we-care" className="my-20 lg:my-28">
+          <CareApproach />
         </section>
-        ) : null}
 
         <section
           id="unlock-power"

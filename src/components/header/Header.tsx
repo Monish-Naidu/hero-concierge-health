@@ -97,7 +97,7 @@ export const Header = ({
         >
           <div className="w-full gap-2 px-0 py-4 flex-row-start" suppressHydrationWarning>
             {Logo}
-            <nav className="grow gap-3 flex-row-center lg:gap-[44px]">
+            <nav className="flex grow flex-row items-center justify-evenly">
               {desktopItems}
             </nav>
             <div className="flex items-center gap-4">
