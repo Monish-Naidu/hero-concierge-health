@@ -4,6 +4,7 @@ import { Loader } from '@/components/loader/Loader';
 import { AboutSection, HeroSection } from '@/sections';
 import { Contact } from '@/sections/contact/contact';
 import { CareApproach } from '@/sections/care-approach/care-approach';
+import { ClinicGallery } from '@/sections/clinic-gallery/clinic-gallery';
 import { Differentiator } from '@/sections/differentiator/differentiator';
 import { HowItWorks } from '@/sections/how-it-works/how-it-works';
 import { FeaturedServices } from '@/sections/featured-services/featured-services';
@@ -251,7 +252,7 @@ export default function Home() {
         </div>
       )}
       {/* Main page content */}
-      <main className={`transition-opacity duration-500 ${showLoader && loading ? 'opacity-0' : 'opacity-100'}`}>
+      <main className={`w-full overflow-x-hidden transition-opacity duration-500 ${showLoader && loading ? 'opacity-0' : 'opacity-100'}`}>
         <section id="home">
           <HeroSection
             title={hero?.title}
@@ -262,15 +263,16 @@ export default function Home() {
           />
         </section>
 
-        <section id="why-us" className="my-20 lg:my-28">
+        {/* Differentiator overlaps the interactive "How we care" section — hidden on mobile to reduce scroll */}
+        <section id="why-us" className="my-12 hidden sm:my-16 md:block lg:my-28">
           <Differentiator />
         </section>
 
-        <section id="how-it-works" className="my-20 lg:my-28">
+        <section id="how-it-works" className="my-12 sm:my-16 lg:my-28">
           <HowItWorks />
         </section>
 
-        <section id="about-us" className="my-20 lg:my-28">
+        <section id="about-us" className="my-12 sm:my-16 lg:my-28">
           <AboutSection
             title={aboutUsData?.title || ''}
             content={aboutUsData?.content || []}
@@ -279,7 +281,7 @@ export default function Home() {
           />
         </section>
 
-        <section id="how-we-care" className="my-20 lg:my-28">
+        <section id="how-we-care" className="my-12 sm:my-16 lg:my-28">
           <CareApproach />
         </section>
 
@@ -293,11 +295,15 @@ export default function Home() {
           />
         </section>
 
-        <section className="my-20 lg:my-28">
+        <section className="my-12 sm:my-16 lg:my-28">
           <MembershipTeaser />
         </section>
 
-        <section className="mb-[50px] mt-20 lg:mt-28">
+        <section id="visit" className="my-12 sm:my-16 lg:my-28">
+          <ClinicGallery />
+        </section>
+
+        <section className="mb-[50px] mt-12 sm:mt-16 lg:mt-28">
           <Contact
             title={contactData?.title || ''}
             subtitle={contactData?.subtitle || ''}

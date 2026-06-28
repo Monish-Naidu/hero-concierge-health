@@ -1,0 +1,22 @@
+<svg width="460" height="520" viewBox="0 0 460 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Doctor photo placeholder">
+  <!-- TODO: replace with a real doctor photo (transparent-bg cutout, ~460x520) -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4EEE3"/>
+      <stop offset="1" stop-color="#E7DAC6"/>
+    </linearGradient>
+  </defs>
+  <rect x="40" y="40" width="380" height="460" rx="32" fill="url(#bg)" stroke="#A86A45" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="10 10"/>
+  <!-- shoulders / coat -->
+  <path d="M120 500c0-72 49-118 110-118s110 46 110 118v0H120v0Z" fill="#8A7257" fill-opacity="0.35"/>
+  <path d="M178 392c0 0 22 34 52 34s52-34 52-34l20 12c-22 22-46 30-72 30s-50-8-72-30l20-12Z" fill="#FFFFFF" fill-opacity="0.6"/>
+  <!-- stethoscope hint -->
+  <path d="M205 398c-18 22-10 60 22 60s40-38 22-60" stroke="#A86A45" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="247" cy="470" r="12" fill="#A86A45"/>
+  <!-- head -->
+  <circle cx="230" cy="300" r="68" fill="#8A7257" fill-opacity="0.45"/>
+  <circle cx="230" cy="262" r="44" fill="#8A7257" fill-opacity="0.55"/>
+  <!-- label -->
+  <text x="230" y="150" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="700" fill="#A86A45" letter-spacing="2">DOCTOR PHOTO</text>
+  <text x="230" y="178" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="13" font-weight="600" fill="#8A7257" letter-spacing="1">Insert clinician headshot</text>
+</svg>

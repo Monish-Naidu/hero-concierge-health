@@ -3,7 +3,7 @@
 import { ServiceCardType } from '@/api/types';
 import QuickContactModal from './QuickContactModal';
 import { usePathname } from 'next/navigation';
-import { Phone, MessageSquare, Send } from 'lucide-react';
+import { Phone, MessageSquare, Send, Menu, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
@@ -291,181 +291,137 @@ export const MobileHeader = ({
   activeSection?: string;
 }) => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const [isPhoneDropdownOpen, setIsPhoneDropdownOpen] = useState(false);
-  const phoneButtonRef = useRef<HTMLDivElement>(null);
-  const navRef = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
+  // Close the drawer on Escape; lock body scroll while open.
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (phoneButtonRef.current && !phoneButtonRef.current.contains(event.target as Node)) {
-        setIsPhoneDropdownOpen(false);
-      }
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false);
     };
-
-    if (isPhoneDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
     };
-  }, [isPhoneDropdownOpen]);
-
-  useEffect(() => {
-    if (!navRef.current || !activeSection) return;
-
-    const allLinks = navRef.current.querySelectorAll('a');
-    let foundLink: Element | null = null;
-
-    for (let i = 0; i < allLinks.length; i++) {
-      const href = allLinks[i].getAttribute('href');
-      if (href === `/#${activeSection}`) {
-        foundLink = allLinks[i];
-        break;
-      }
-    }
-
-    if (foundLink && foundLink.parentElement) {
-      foundLink.parentElement.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
-      });
-    }
-  }, [activeSection]);
+  }, [menuOpen]);
 
   return (
-    <div className={cn('container relative z-50 block px-4 py-2 xl:hidden')} suppressHydrationWarning>
-      <div className="w-full items-center gap-2 px-0 pb-4 pt-2 flex-row-between" suppressHydrationWarning>
-        {Logo}
-        <div className="flex items-center gap-2 sm:gap-4">
-          <div className="relative" ref={phoneButtonRef}>
-            <motion.button
-              onClick={() => setIsPhoneDropdownOpen(!isPhoneDropdownOpen)}
-              animate={{
-                boxShadow: [
-                  '0 0 0 0px rgba(168,106,69, 0)',
-                  '0 0 0 8px rgba(168,106,69, 0.2)',
-                  '0 0 0 0px rgba(168,106,69, 0)',
-                ],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="flex h-[40px] w-[40px] items-center justify-center rounded-full border-[1px] border-[#A86A45] bg-[#A86A45] text-white shadow-custom-green transition-all hover:scale-105 sm:h-[50px] sm:w-[50px] md:h-[60px] md:w-[60px]"
-              style={{
-                background:
-                  'radial-gradient(163.33% 163.33% at 50% 100%, rgba(255, 255, 255, 0.45) 0%, rgba(0, 0, 0, 0) 100%, rgba(255, 255, 255, 0) 100%), #A86A45',
-                backgroundBlendMode: 'overlay, normal',
-              }}
-            >
-              <motion.div
-                animate={{
-                  rotate: [0, -10, 10, -10, 10, 0],
-                }}
-                transition={{
-                  duration: 0.5,
-                  repeat: Infinity,
-                  repeatDelay: 3,
-                }}
-                className="flex items-center justify-center"
-              >
-                <Phone size={18} color="white" className="sm:hidden" />
-                <Phone size={22} color="white" className="hidden sm:block md:hidden" />
-                <Phone size={28} color="white" className="hidden md:block" />
-              </motion.div>
-            </motion.button>
-            <AnimatePresence>
-              {isPhoneDropdownOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute left-1/2 top-full mt-2 z-[9999] flex min-w-[200px] -translate-x-1/2 flex-col overflow-hidden rounded-[20px] border border-[#A86A45]/30 bg-white p-1.5 shadow-[0_10px_30px_rgba(168,106,69,0.2)] backdrop-blur-xl sm:min-w-[240px] sm:left-auto sm:right-0 sm:translate-x-0 sm:p-2"
-                >
-                  <a
-                    href="tel:+13124654653"
-                    className="flex items-center gap-2 rounded-[14px] p-2 transition-colors hover:bg-[#A86A45]/10 sm:gap-3 sm:rounded-[16px] sm:p-3"
-                    onClick={() => setIsPhoneDropdownOpen(false)}
-                  >
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#A86A45]/20 text-[#A86A45] sm:h-10 sm:w-10">
-                      <Phone size={16} className="sm:size-[20px]" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-xs font-bold text-[#2D2525] sm:text-sm">Call Us</span>
-                      <span className="text-[10px] text-[#2D2525]/60 sm:text-xs">+1 (312) 465-4653</span>
-                    </div>
-                  </a>
-                  <a
-                    href="sms:+13124654653"
-                    className="flex items-center gap-2 rounded-[14px] p-2 transition-colors hover:bg-[#A86A45]/10 sm:gap-3 sm:rounded-[16px] sm:p-3"
-                    onClick={() => setIsPhoneDropdownOpen(false)}
-                  >
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#A86A45]/20 text-[#A86A45] sm:h-10 sm:w-10">
-                      <MessageSquare size={16} className="sm:size-[20px]" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-xs font-bold text-[#2D2525] sm:text-sm">Text Message</span>
-                      <span className="text-[10px] text-[#2D2525]/60 sm:text-xs">+1 (312) 465-4653</span>
-                    </div>
-                  </a>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-          <motion.div
-            animate={{
-              scale: [1, 1.03, 1],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
+    <div className={cn('relative z-50 block w-full px-4 py-3 xl:hidden')} suppressHydrationWarning>
+      {/* Top bar: logo · Get a Callback · hamburger */}
+      <div className="flex w-full items-center justify-between gap-2" suppressHydrationWarning>
+        <div className="min-w-0 shrink">{Logo}</div>
+        <div className="flex shrink-0 items-center gap-2">
+          <Button
+            onClick={() => setIsContactModalOpen(true)}
+            className="flex items-center gap-2 rounded-[40px] border border-[#A86A45] bg-[#A86A45] px-3.5 py-2.5 text-[13px] font-bold text-white shadow-custom-green sm:px-5 sm:text-[15px]"
+            style={{
+              background:
+                'radial-gradient(163.33% 163.33% at 50% 100%, rgba(255, 255, 255, 0.45) 0%, rgba(0, 0, 0, 0) 100%, rgba(255, 255, 255, 0) 100%), #A86A45',
+              backgroundBlendMode: 'overlay, normal',
             }}
           >
-            <Button
-              onClick={() => setIsContactModalOpen(true)}
-              className="group relative flex items-center gap-2 overflow-hidden rounded-[56px] border-[1px] border-[#A86A45] bg-[#A86A45] px-[15px] py-[15px] text-[14px] font-bold text-white shadow-custom-green [text-shadow:2px_2px_10px_rgba(0,0,0,0.25)] sm:px-[20px] sm:py-[20px] sm:text-[16px] md:p-[30px] md:text-[24px]"
-              style={{
-                background:
-                  'radial-gradient(163.33% 163.33% at 50% 100%, rgba(255, 255, 255, 0.45) 0%, rgba(0, 0, 0, 0) 100%, rgba(255, 255, 255, 0) 100%), #A86A45',
-                backgroundBlendMode: 'overlay, normal',
-              }}
-            >
-              <motion.div
-                className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                initial={{ x: '-100%' }}
-                animate={{ x: '100%' }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: 'linear',
-                  repeatDelay: 3,
-                }}
-                style={{ skewX: -20 }}
-              />
-              <Send size={18} className="relative z-10 sm:size-[22px] md:size-[28px]" />
-              <span className="relative z-10">Get a Callback</span>
-            </Button>
-          </motion.div>
+            <Send size={16} className="sm:size-[18px]" />
+            <span className="sm:hidden">Callback</span>
+            <span className="hidden sm:inline">Get a Callback</span>
+          </Button>
+          <button
+            type="button"
+            aria-label="Open menu"
+            onClick={() => setMenuOpen(true)}
+            className="flex h-11 w-11 items-center justify-center rounded-[12px] border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+          >
+            <Menu size={22} />
+          </button>
         </div>
       </div>
-      <nav
-        ref={navRef}
-        className={cn(
-          'no-scrollbar grow gap-[25px] overflow-x-auto flex-row-around lg:gap-[44px]'
+
+      {/* Slide-in drawer */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[998] bg-black/50 backdrop-blur-sm"
+              onClick={() => setMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+              className="fixed right-0 top-0 z-[999] flex h-full w-[82%] max-w-[340px] flex-col bg-ink p-6 shadow-[0_0_60px_rgba(0,0,0,0.5)]"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[13px] font-semibold uppercase tracking-[0.2em] text-white/50">
+                  Menu
+                </span>
+                <button
+                  type="button"
+                  aria-label="Close menu"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Nav links (tapping any link closes the drawer) */}
+              <nav
+                className="mt-8 flex flex-col gap-3 text-[18px]"
+                onClick={() => setMenuOpen(false)}
+              >
+                {children}
+              </nav>
+
+              <div className="my-6 h-px bg-white/10" />
+
+              {/* Call / Text quick actions */}
+              <div className="flex flex-col gap-2">
+                <a
+                  href="tel:+13124654653"
+                  className="flex items-center gap-3 rounded-[14px] bg-white/5 p-3 transition-colors hover:bg-white/10"
+                >
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#A86A45]/25 text-[#D8BFA6]">
+                    <Phone size={18} />
+                  </span>
+                  <span className="flex flex-col">
+                    <span className="text-[14px] font-bold text-white">Call us</span>
+                    <span className="text-[12px] text-white/55">+1 (312) 465-4653</span>
+                  </span>
+                </a>
+                <a
+                  href="sms:+13124654653"
+                  className="flex items-center gap-3 rounded-[14px] bg-white/5 p-3 transition-colors hover:bg-white/10"
+                >
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#A86A45]/25 text-[#D8BFA6]">
+                    <MessageSquare size={18} />
+                  </span>
+                  <span className="flex flex-col">
+                    <span className="text-[14px] font-bold text-white">Text us</span>
+                    <span className="text-[12px] text-white/55">+1 (312) 465-4653</span>
+                  </span>
+                </a>
+              </div>
+
+              <Button
+                onClick={() => {
+                  setMenuOpen(false);
+                  setIsContactModalOpen(true);
+                }}
+                className="mt-auto flex w-full items-center justify-center gap-2 rounded-[40px] bg-[#A86A45] px-6 py-4 text-[16px] font-bold text-white shadow-custom-green"
+              >
+                <Send size={18} /> Get a Callback
+              </Button>
+            </motion.div>
+          </>
         )}
-        style={{
-          overflowY: 'visible',
-          overflowX: 'auto',
-          WebkitOverflowScrolling: 'touch',
-          paddingBottom: '10px',
-        }}
-      >
-        {children}
-      </nav>
+      </AnimatePresence>
+
       <QuickContactModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}

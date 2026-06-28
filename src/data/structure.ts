@@ -360,7 +360,7 @@ export const structureData: StructureData = {
             "subtitle1": "FREE Lab Panel",
             "subtitle2": "$99",
             "subtitle3": "For New Patients to Sign Up",
-            "image": "/image/main-page/hero_aaron.webp"
+            "image": "/images/placeholders/doctor-placeholder.svg"
           }
         ]
       },

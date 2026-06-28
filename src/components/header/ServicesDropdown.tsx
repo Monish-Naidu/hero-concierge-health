@@ -138,7 +138,7 @@ export const ServicesDropdown = ({
             <div 
               className="overflow-auto rounded-[30px] border border-[#A86A45]/30 bg-white p-4 shadow-[0_20px_60px_rgba(168,106,69,0.2)] backdrop-blur-xl md:p-6"
               style={{
-                background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FFFE 100%)',
+                background: 'linear-gradient(180deg, #FFFFFF 0%, #FBF7F1 100%)',
                 maxHeight: 'calc(100vh - 100px)',
               }}
             >

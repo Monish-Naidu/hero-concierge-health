@@ -65,7 +65,7 @@ export const HomeStickyFeaturesSection: React.FC<
                 <ul className="mb-10 space-y-2">
                   {content.map((benefit: string, idx: number) => (
                     <li key={idx} className="flex items-center gap-4">
-                      <div className="bg-gradient-radial h-[18px] w-[18px] flex-none rounded-full bg-[#A86A45] from-[#A86A45] via-[#A86A45] to-transparent drop-shadow-[0px_10px_19px_rgba(99,_200,_155,_0.28)] filter" />
+                      <div className="bg-gradient-radial h-[18px] w-[18px] flex-none rounded-full bg-[#A86A45] from-[#A86A45] via-[#A86A45] to-transparent drop-shadow-[0px_10px_19px_rgba(168,_106,_69,_0.28)] filter" />
                       <Typography variant="h5" className="text-[#79738B]">
                         {benefit}
                       </Typography>

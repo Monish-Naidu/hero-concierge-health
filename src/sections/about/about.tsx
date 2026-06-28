@@ -82,7 +82,7 @@ export const AboutSection = ({
         <div className="w-full lg:w-1/2">
           <div className="relative mx-auto max-w-[461px] lg:mx-0">
             <div 
-              className="relative mx-auto aspect-square w-full max-w-[300px] overflow-hidden rounded-t-[32px] border-4 border-[#A86A45]/20 shadow-[0_8px_32px_rgba(87,_191,_145,_0.15)] sm:max-w-[360px] md:rounded-t-[40px] lg:ml-[175px] lg:mr-0 lg:max-w-[461px]"
+              className="relative mx-auto aspect-square w-full max-w-[300px] overflow-hidden rounded-t-[32px] border-4 border-[#A86A45]/20 shadow-[0_8px_32px_rgba(168,_106,_69,_0.15)] sm:max-w-[360px] md:rounded-t-[40px] lg:ml-[175px] lg:mr-0 lg:max-w-[461px]"
               style={{
                 background:
                   'radial-gradient(163.33% 163.33% at 50% 100%, rgba(255, 255, 255, 0.45) 0%, rgba(0, 0, 0, 0) 100%, rgba(255, 255, 255, 0) 100%), #A86A45',
@@ -115,7 +115,7 @@ export const AboutSection = ({
                   <div className="absolute -inset-1 rounded-[20px] bg-[#A86A45] opacity-10 blur-md animate-pulse sm:rounded-[24px]" />
                   
                   <div className="relative rounded-t-[17px] bg-white sm:rounded-t-[19px]">
-                    <div className="bg-white bg-[linear-gradient(180deg,_#A86A45_26.82%,_rgba(99,_200,_155,_0.70)_77.27%)] bg-clip-text py-2 text-center text-[13px] font-bold uppercase text-transparent sm:py-3 sm:text-[16px] md:py-1 md:text-[23px] lg:text-[28px]">
+                    <div className="bg-white bg-[linear-gradient(180deg,_#A86A45_26.82%,_rgba(168,_106,_69,_0.70)_77.27%)] bg-clip-text py-2 text-center text-[13px] font-bold uppercase text-transparent sm:py-3 sm:text-[16px] md:py-1 md:text-[23px] lg:text-[28px]">
                       {offers[0]?.title || 'Coming Soon...'}
                     </div>
                   </div>
@@ -175,11 +175,12 @@ export const AboutSection = ({
                 className="flex justify-center"
                 content={
                   <div className="w-full rounded-[20px] border-[1px] border-white/50 bg-white/95 px-6 py-4 text-center shadow-[0_15px_30px_rgba(0,0,0,0.12)] backdrop-blur-md sm:rounded-[24px] sm:px-10 sm:py-5 lg:px-12 lg:py-6">
+                    {/* TODO: replace with the real clinician's name + credentials */}
                     <Typography
                       variant="h5"
                       className="w-full text-center whitespace-nowrap font-bold leading-tight text-[#2D2525] text-[18px] sm:text-xl lg:text-3xl"
                     >
-                      Aaron Manshaem
+                      Your Care Team
                     </Typography>
                     <div className="mt-1 flex items-center justify-center gap-2 sm:mt-2 sm:gap-3">
                       <div className="h-[1px] w-6 bg-[#A86A45]/30 sm:w-8" />
@@ -187,7 +188,7 @@ export const AboutSection = ({
                         variant="h6"
                         className="text-center font-bold tracking-[0.15em] text-[#A86A45] text-[12px] sm:text-[14px] md:text-[15px]"
                       >
-                        PA-C
+                        BOARD-CERTIFIED
                       </Typography>
                       <div className="h-[1px] w-6 bg-[#A86A45]/30 sm:w-8" />
                     </div>

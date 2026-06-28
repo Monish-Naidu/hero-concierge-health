@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { Typography } from '@/components/ui/Typography';
 import BookingModal from '@/components/header/QuickContactModal';
 import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 import { useState } from 'react';
 
 type Props = {
@@ -46,6 +47,23 @@ export const HeroSection = (props: Props) => {
 
       {/* Overlay Content */}
       <div className="container relative z-10 flex w-full flex-col items-center gap-0 sm:mt-0 sm:gap-[0px] md:gap-[5px] lg:gap-0" suppressHydrationWarning>
+        <FadeText
+          framerProps={{
+            show: { transition: { delay: 0.1 } },
+          }}
+          direction="up"
+          className="mb-3 flex justify-center sm:mb-4"
+          content={
+            <Image
+              src="/images/chicago-stethoscope-emblem.svg"
+              alt="Hero Concierge Health — a real clinic in Chicago"
+              width={140}
+              height={146}
+              priority
+              className="h-auto w-[96px] drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)] sm:w-[120px] lg:w-[132px]"
+            />
+          }
+        />
         <FadeText
           framerProps={{
             show: { transition: { delay: 0.2 } },

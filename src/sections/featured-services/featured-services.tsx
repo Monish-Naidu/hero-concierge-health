@@ -54,7 +54,7 @@ export function FeaturedServices(props: Props) {
                 className="group relative flex w-full max-w-[640px] flex-col items-center justify-center"
               >
                 {/* Card Container with Gradient Border */}
-                <div className="relative w-full overflow-hidden rounded-[32px] border border-[#A86A45]/20 bg-white p-[2px] shadow-[0_8px_32px_rgba(87,_191,_145,_0.1)] transition-all duration-500 hover:border-[#A86A45]/40 hover:shadow-[0_12px_48px_rgba(87,_191,_145,_0.2)] sm:rounded-[40px] md:rounded-[48px]">
+                <div className="relative w-full overflow-hidden rounded-[32px] border border-[#A86A45]/20 bg-white p-[2px] shadow-[0_8px_32px_rgba(168,_106,_69,_0.1)] transition-all duration-500 hover:border-[#A86A45]/40 hover:shadow-[0_12px_48px_rgba(168,_106,_69,_0.2)] sm:rounded-[40px] md:rounded-[48px]">
                   {/* Gradient Border Background */}
                   <div 
                     className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -64,10 +64,10 @@ export function FeaturedServices(props: Props) {
                   />
                   
                   {/* Card Content */}
-                  <div className="relative rounded-[30px] bg-gradient-to-br from-white to-[#F8FFFE] p-6 sm:rounded-[38px] sm:p-8 md:rounded-[46px] md:p-10">
+                  <div className="relative rounded-[30px] bg-gradient-to-br from-white to-[#FBF7F1] p-6 sm:rounded-[38px] sm:p-8 md:rounded-[46px] md:p-10">
                     {/* Image Container with Enhanced Styling */}
                     <div className="relative mb-6 w-full overflow-hidden rounded-[24px] shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-500 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.16)] sm:mb-8 sm:rounded-[28px] md:mb-10 md:rounded-[32px]">
-                      <div className="relative aspect-[4/3] w-full overflow-hidden">
+                      <div className="relative aspect-[16/9] w-full overflow-hidden sm:aspect-[4/3]">
                         {item.image && (
                         <Image
                           src={item.image}
@@ -116,9 +116,9 @@ export function FeaturedServices(props: Props) {
                         )}
                         <ul className="flex flex-col gap-4 sm:gap-5 md:gap-6">
                           {item.points.map((benefit: string, pointIndex: number) => (
-                            <li 
-                              key={pointIndex} 
-                              className="group/point flex items-start gap-4 rounded-[16px] p-3 transition-all duration-300 hover:bg-[#F0FDF9] sm:gap-5 sm:p-4"
+                            <li
+                              key={pointIndex}
+                              className={`group/point items-start gap-4 rounded-[16px] p-3 transition-all duration-300 hover:bg-[#F6F0E8] sm:gap-5 sm:p-4 ${pointIndex >= 3 ? 'hidden sm:flex' : 'flex'}`}
                             >
                               {/* Enhanced Icon with Checkmark */}
                               <div className="relative mt-1 flex-shrink-0">
@@ -126,7 +126,7 @@ export function FeaturedServices(props: Props) {
                                   {/* Outer Glow */}
                                   <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-br from-[#A86A45] to-[#7E4A2E] opacity-60 blur-[4px] group-hover/point:opacity-100 group-hover/point:blur-[6px]" />
                                   {/* Main Icon */}
-                                  <div className="relative flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#A86A45] via-[#7E4A2E] to-[#7E4A2E] shadow-[0_4px_12px_rgba(87,_191,_145,_0.4)] transition-all duration-300 group-hover/point:scale-110 group-hover/point:shadow-[0_6px_16px_rgba(87,_191,_145,_0.6)]">
+                                  <div className="relative flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#A86A45] via-[#7E4A2E] to-[#7E4A2E] shadow-[0_4px_12px_rgba(168,_106,_69,_0.4)] transition-all duration-300 group-hover/point:scale-110 group-hover/point:shadow-[0_6px_16px_rgba(168,_106,_69,_0.6)]">
                                     {/* Checkmark Icon */}
                                     <svg 
                                       className="h-[12px] w-[12px] text-white sm:h-[14px] sm:w-[14px] md:h-[16px] md:w-[16px]" 
@@ -160,7 +160,7 @@ export function FeaturedServices(props: Props) {
                     {item.ctaText ? (
                       <Button
                         onClick={() => router.push(item.link || '#')}
-                        className="group/button relative mx-auto w-full max-w-[300px] overflow-hidden rounded-[56px] border-2 border-[#A86A45] bg-[#A86A45] px-8 py-5 text-[15px] font-bold text-white shadow-[0_6px_24px_rgba(87,_191,_145,_0.35)] transition-all duration-300 hover:scale-105 hover:border-[#7E4A2E] hover:shadow-[0_8px_32px_rgba(87,_191,_145,_0.5)] active:scale-95 [text-shadow:2px_2px_8px_rgba(0,0,0,0.2)] sm:max-w-[340px] sm:px-10 sm:py-6 sm:text-[17px] md:max-w-[380px] md:px-12 md:py-7 md:text-[19px]"
+                        className="group/button relative mx-auto w-full max-w-[300px] overflow-hidden rounded-[56px] border-2 border-[#A86A45] bg-[#A86A45] px-8 py-5 text-[15px] font-bold text-white shadow-[0_6px_24px_rgba(168,_106,_69,_0.35)] transition-all duration-300 hover:scale-105 hover:border-[#7E4A2E] hover:shadow-[0_8px_32px_rgba(168,_106,_69,_0.5)] active:scale-95 [text-shadow:2px_2px_8px_rgba(0,0,0,0.2)] sm:max-w-[340px] sm:px-10 sm:py-6 sm:text-[17px] md:max-w-[380px] md:px-12 md:py-7 md:text-[19px]"
                         style={{
                           background:
                             'radial-gradient(163.33% 163.33% at 50% 100%, rgba(255, 255, 255, 0.45) 0%, rgba(0, 0, 0, 0) 100%), #A86A45',
