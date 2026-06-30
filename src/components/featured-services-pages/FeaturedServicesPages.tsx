@@ -2,6 +2,7 @@
 
 import { ServiceCardType } from '@/api/types';
 import { Marquee } from '@/components/ui/Marquee';
+import { StockPhotoBadge } from '@/components/ui/StockPhotoBadge';
 import { Typography } from '@/components/ui/Typography';
 import Image from 'next/image';
 
@@ -29,6 +30,7 @@ const ServiceCard = ({ item }: { item: ServiceCardType }) => {
           {item.image && (
             <div className="relative mb-3 w-full overflow-hidden rounded-[16px] shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-500 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.16)] sm:mb-4 sm:rounded-[20px] md:mb-4 md:rounded-[24px]">
               <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <StockPhotoBadge />
                 <Image
                   src={item.image}
                   alt={item.name}

@@ -1,6 +1,7 @@
 'use client';
 
 import { ServiceCardType } from '@/api/types';
+import { StockPhotoBadge } from '@/components/ui/StockPhotoBadge';
 import { cn } from '@/utils/cn';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
@@ -57,6 +58,7 @@ function ServiceCard({
     >
       {/* Photo */}
       <Link href={href} className="relative block aspect-[4/3] overflow-hidden">
+        <StockPhotoBadge />
         {service.image ? (
           <Image
             src={service.image}
