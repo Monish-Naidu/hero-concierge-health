@@ -45,25 +45,24 @@ export const Journey = ({
       <div
         className="flex h-full !flex-col-reverse items-end justify-end gap-4 rounded-[36px] md:flex-row-center lg:gap-0 xl:pr-[90px] xl:!flex-row-between"
         style={{
-          background: 'linear-gradient(96deg, #E2E6EF 0%, #ECFFF7 100%)',
+          background: 'linear-gradient(96deg, #F4EEE3 0%, #E7DAC6 100%)',
         }}
       >
-        <div className="hidden xl:block">
+        <div className="hidden shrink-0 p-8 xl:block">
           <Image
-            src="/images/journey.webp"
-            className="rounded-t-[36px]"
-            width={580}
-            height={580}
-            alt="Journey"
+            src="/images/hero-stethoscope.svg"
+            width={460}
+            height={460}
+            alt="Be your own hero — concierge health"
+            priority
           />
         </div>
-        <div className="block xl:hidden">
+        <div className="block shrink-0 pt-6 xl:hidden">
           <Image
-            className="rounded-b-[36px]"
-            src="/images/md-journey.webp"
-            width={780}
-            height={580}
-            alt="Journey"
+            src="/images/hero-stethoscope.svg"
+            width={300}
+            height={300}
+            alt="Be your own hero — concierge health"
           />
         </div>
         <div className="w-full px-[20px] pt-[15px] text-center sm:px-[65px] sm:pt-[70px] lg:w-[800px] lg:px-0 xl:pt-0 xl:text-left">
