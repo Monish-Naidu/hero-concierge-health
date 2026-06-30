@@ -215,15 +215,13 @@ const NavBarContent = ({
     };
   }, [menuItems]);
 
-  if (loading || !menuItems.length) {
+  if (loading) {
     return (
       <Header
         Logo={<LogoLink />}
         variant={variant}
         sticky={sticky}
-        lastItem={''}
-        desktopItems={<></>}
-        mobileItems={<></>}
+        services={servicesData}
       />
     );
   }
@@ -233,48 +231,7 @@ const NavBarContent = ({
         Logo={<LogoLink />}
         variant={variant}
         sticky={sticky}
-        lastItem={menuItems[menuItems.length - 1]?.name || ''}
-        desktopItems={
-          <>
-            {menuItems.slice(0, -1).map((link) => (
-              <HeaderLink
-                key={link.name}
-                href={link.href}
-                name={link.name}
-                isActive={
-                  link.href.includes('#') &&
-                  link.href.split('#')[1] === activeSection
-                }
-                services={
-                  link.name.toLowerCase() === 'services'
-                    ? servicesData
-                    : undefined
-                }
-              />
-            ))}
-          </>
-        }
-        mobileItems={
-          <>
-            {menuItems.slice(0, -1).map((link) => (
-              <HeaderLink
-                key={link.name}
-                href={link.href}
-                name={link.name}
-                isActive={
-                  link.href.includes('#') &&
-                  link.href.split('#')[1] === activeSection
-                }
-                services={
-                  link.name.toLowerCase() === 'services'
-                    ? servicesData
-                    : undefined
-                }
-              />
-            ))}
-          </>
-        }
-        activeSection={activeSection}
+        services={servicesData}
       />
     </>
   );
@@ -323,8 +280,8 @@ export const MobileHeader = ({
             }}
           >
             <Send size={16} className="sm:size-[18px]" />
-            <span className="sm:hidden">Callback</span>
-            <span className="hidden sm:inline">Get a Callback</span>
+            <span className="sm:hidden">Contact</span>
+            <span className="hidden sm:inline">Contact Hero</span>
           </Button>
           <button
             type="button"
@@ -415,7 +372,7 @@ export const MobileHeader = ({
                 }}
                 className="mt-auto flex w-full items-center justify-center gap-2 rounded-[40px] bg-[#A86A45] px-6 py-4 text-[16px] font-bold text-white shadow-custom-green"
               >
-                <Send size={18} /> Get a Callback
+                <Send size={18} /> Contact Hero
               </Button>
             </motion.div>
           </>

@@ -10,7 +10,7 @@ import { useState } from 'react';
  * Reusable across landing sections and standalone pages.
  */
 export function CallbackButton({
-  label = 'Get a Callback',
+  label = 'Contact Hero',
   variant = 'solid',
   className,
   withIcon = true,

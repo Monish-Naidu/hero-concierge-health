@@ -6,7 +6,6 @@ import { Contact } from '@/sections/contact/contact';
 import { CareApproach } from '@/sections/care-approach/care-approach';
 import { ClinicGallery } from '@/sections/clinic-gallery/clinic-gallery';
 import { Differentiator } from '@/sections/differentiator/differentiator';
-import { HowItWorks } from '@/sections/how-it-works/how-it-works';
 import { FeaturedServices } from '@/sections/featured-services/featured-services';
 import { MembershipTeaser } from '@/sections/membership-teaser/membership-teaser';
 import { useEffect, useState } from 'react';
@@ -61,112 +60,7 @@ export default function Home() {
   const contactData = getDataSectionById('new-location');
   const footerData = getDataSectionById('footer');
 
-  // Map service links to service slugs
-  const serviceLinkToSlug: { [key: string]: string } = {
-    '/services/hormone-optimization': 'hormone-optimization',
-    '/services/weight-optimization': 'weight-optimization',
-    '/services/nad-therapy': 'nad-therapy',
-    '/services/sexual-health': 'sexual-health',
-    '/services/aesthetics': 'aesthetics',
-  };
-
-  // Dynamically select random images from benefits sections (changes every 20 minutes)
-  const [featuredServicesData, setFeaturedServicesData] = useState<any>(null);
-
-  useEffect(() => {
-    if (!featuredServicesDataRaw || !servicesData) {
-      setFeaturedServicesData(featuredServicesDataRaw);
-      return;
-    }
-
-    const STORAGE_KEY = 'featured_services_images';
-    const CACHE_DURATION = 20 * 60 * 1000; // 20 minutes in milliseconds
-
-    // Check if we have cached images and if they're still valid
-    const cachedData = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
-    let cachedImages: { [key: string]: string } | null = null;
-    let lastUpdateTime: number | null = null;
-
-    if (cachedData) {
-      try {
-        const parsed = JSON.parse(cachedData);
-        cachedImages = parsed.images || null;
-        lastUpdateTime = parsed.timestamp || null;
-      } catch (e) {
-        // Invalid cache, ignore
-      }
-    }
-
-    const now = Date.now();
-    const shouldUpdate = !lastUpdateTime || (now - lastUpdateTime) >= CACHE_DURATION;
-
-    if (!shouldUpdate && cachedImages) {
-      // Use cached images
-      const servicesWithCachedImages = featuredServicesDataRaw.services?.map((service: any) => {
-        const cachedImage = cachedImages![service.link];
-        if (cachedImage) {
-          return {
-            ...service,
-            image: cachedImage,
-          };
-        }
-        return service;
-      });
-
-      setFeaturedServicesData({
-        ...featuredServicesDataRaw,
-        services: servicesWithCachedImages,
-      });
-      return;
-    }
-
-    // Generate new images
-    const newImages: { [key: string]: string } = {};
-    const servicesWithDynamicImages = featuredServicesDataRaw.services?.map((service: any) => {
-      const serviceSlug = serviceLinkToSlug[service.link];
-      if (!serviceSlug || !servicesData[serviceSlug]) {
-        return service;
-      }
-
-      const serviceData = servicesData[serviceSlug];
-      const benefitsSection = serviceData.sections?.find((section: any) => section.id === 'benefits');
-      
-      if (benefitsSection?.points && Array.isArray(benefitsSection.points) && benefitsSection.points.length > 0) {
-        // Filter points that have images
-        const pointsWithImages = benefitsSection.points.filter((point: any) => 
-          point?.image && typeof point.image === 'string'
-        );
-        
-        if (pointsWithImages.length > 0) {
-          // Randomly select one image
-          const randomIndex = Math.floor(Math.random() * pointsWithImages.length);
-          const selectedPoint = pointsWithImages[randomIndex];
-          
-          newImages[service.link] = selectedPoint.image;
-          
-          return {
-            ...service,
-            image: selectedPoint.image,
-          };
-        }
-      }
-
-      return service;
-    });
-
-    // Save to localStorage
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        images: newImages,
-        timestamp: now,
-      }));
-    }
-
-    setFeaturedServicesData({
-      ...featuredServicesDataRaw,
-      services: servicesWithDynamicImages,
-    });
-  }, [featuredServicesDataRaw, servicesData]);
+  // Featured services render their curated images directly from structure.ts.
 
   // Get SEO data
   const seoData = structureData.seo?.home || {
@@ -268,10 +162,6 @@ export default function Home() {
           <Differentiator />
         </section>
 
-        <section id="how-it-works" className="my-12 sm:my-16 lg:my-28">
-          <HowItWorks />
-        </section>
-
         <section id="about-us" className="my-12 sm:my-16 lg:my-28">
           <AboutSection
             title={aboutUsData?.title || ''}
@@ -285,13 +175,10 @@ export default function Home() {
           <CareApproach />
         </section>
 
-        <section
-          id="unlock-power"
-          className="relative mb-[60px] flex min-h-[calc(100vh-40px)] w-full flex-col justify-start"
-        >
+        <section id="unlock-power" className="my-12 sm:my-16 lg:my-28">
           <FeaturedServices
-            title={featuredServicesData?.title || ''}
-            content={featuredServicesData?.services || []}
+            title={featuredServicesDataRaw?.title || ''}
+            content={featuredServicesDataRaw?.services || []}
           />
         </section>
 

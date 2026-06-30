@@ -4,6 +4,7 @@ import { cn } from '@/utils/cn';
 import { AnimatePresence, motion } from 'framer-motion';
 import { User, Mail, Phone, X, CheckCircle2, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 interface QuickContactModalProps {
   isOpen: boolean;
@@ -37,6 +38,10 @@ export default function QuickContactModal({
     'idle'
   );
   const [error, setError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  // Portal target is only available on the client.
+  useEffect(() => setMounted(true), []);
 
   // Lock body scroll while open.
   useEffect(() => {
@@ -123,7 +128,9 @@ export default function QuickContactModal({
     }
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -131,11 +138,11 @@ export default function QuickContactModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          className="fixed inset-0 z-[1000] flex items-start justify-center overflow-y-auto p-4 py-8 sm:py-12"
           onClick={onClose}
         >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-[#2D2525]/70 backdrop-blur-[6px]" />
+          {/* Backdrop — fixed so it always covers the viewport even while the modal scrolls */}
+          <div className="fixed inset-0 bg-[#2D2525]/70 backdrop-blur-[6px]" />
 
           {/* Card */}
           <motion.div
@@ -143,7 +150,7 @@ export default function QuickContactModal({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.25, ease: [0.34, 1.56, 0.64, 1] }}
-            className="relative z-10 w-full max-w-[480px] overflow-hidden rounded-[28px] bg-white shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
+            className="relative z-10 my-auto w-full max-w-[480px] overflow-hidden rounded-[28px] bg-white shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close */}
@@ -300,7 +307,7 @@ export default function QuickContactModal({
                         Sending…
                       </>
                     ) : (
-                      <span className="relative z-10">Get a Callback</span>
+                      <span className="relative z-10">Contact Hero</span>
                     )}
                   </button>
                 </motion.form>
@@ -309,7 +316,8 @@ export default function QuickContactModal({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
 

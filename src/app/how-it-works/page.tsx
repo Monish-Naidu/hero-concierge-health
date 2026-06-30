@@ -189,7 +189,7 @@ export default function HowItWorksPage() {
               out to guide you through the next step.
             </p>
             <div className="mt-9 flex justify-center">
-              <CallbackButton label="Get a Callback" variant="light" />
+              <CallbackButton label="Contact Hero" variant="light" />
             </div>
           </motion.div>
         </div>

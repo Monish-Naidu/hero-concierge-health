@@ -2,7 +2,7 @@ import type { StructureData } from '@/api/types';
 
 // Shared constants to avoid repetition
 const freeConsultationMenuItem = {
-  "label": "Get a Callback",
+  "label": "Contact Hero",
   "link": ""
 };
 
@@ -343,7 +343,7 @@ export const structureData: StructureData = {
       "title": "Concierge Health,",
       "short_title": "Done Right",
       "subtitle": "Hero Concierge Health is Chicago’s premier concierge health group for men and women — real telehealth backed by an actual clinic in Lakeview. One team, one place for hormone optimization, weight loss, sexual health, NAD therapy, and aesthetics.",
-      "ctaText": "Get a Callback"
+      "ctaText": "Contact Hero"
     },
     "sections": [
       {
@@ -444,7 +444,7 @@ export const structureData: StructureData = {
               "Personalized monitoring for consistent results"
             ],
             "ctaText": "Explore Hormone Solutions",
-            "image": "/image/services/service-1.webp",
+            "image": "/image/services/hormone-optimization/increased-energy-and-stamina.webp",
             "link": "/services/hormone-optimization"
           },
           {
@@ -457,7 +457,7 @@ export const structureData: StructureData = {
               "Ongoing support from our specialists"
             ],
             "ctaText": "Discover Our Weight Loss Program",
-            "image": "/image/services/service-2.webp",
+            "image": "/image/services/weight-optimization/sustained-weight-loss.webp",
             "link": "/services/weight-optimization"
           },
           {
@@ -470,7 +470,7 @@ export const structureData: StructureData = {
               "Tailored blends for your unique needs"
             ],
             "ctaText": "Explore NAD Therapy Benefits",
-            "image": "/image/services/service-3.webp",
+            "image": "/image/services/nad-therapy/enhanced-cellular-energy-and-vitality.webp",
             "link": "/services/nad-therapy"
           },
           {
@@ -483,7 +483,7 @@ export const structureData: StructureData = {
               "Discreet, judgment-free care"
             ],
             "ctaText": "Discover Sexual Health Solutions",
-            "image": "/image/services/service-5.webp",
+            "image": "/image/services/sexual-health/strengthened-intimacy.webp",
             "link": "/services/sexual-health"
           },
           {
@@ -496,7 +496,7 @@ export const structureData: StructureData = {
               "Discreet, natural-looking results"
             ],
             "ctaText": "Discover Aesthetics & Botox",
-            "image": "/image/services/service-4.webp",
+            "image": "/image/services/aesthetics/natural-results.webp",
             "link": "/services/aesthetics"
           }
         ]
