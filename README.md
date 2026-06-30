@@ -1,223 +1,126 @@
-# Hero Men's Health Website
+# Hero Concierge Health
 
-This project is a website for Hero Men's Health, a men's clinic in Chicago, built using Next.js with TypeScript and Tailwind CSS.
+Marketing website for **Hero Concierge Health** — a concierge health clinic for
+**men and women** in Chicago (Lakeview). The positioning: a one-stop-shop
+concierge clinic whose differentiator is **real telehealth backed by an actual
+physical clinic** — not virtual-only care.
 
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Technologies & Requirements](#technologies--requirements)
-- [Project Structure](#project-structure)
-- [Environment Setup](#environment-setup)
-- [Running & Building](#running--building)
-- [Customization & Extensions](#customization--extensions)
+Built with **Next.js 15 (App Router)**, **TypeScript**, **Tailwind CSS**, and
+**Framer Motion**.
+
+- **Live:** https://hero-concierge-health.vercel.app
+- **Repo:** https://github.com/Monish-Naidu/hero-concierge-health
+
+## Table of contents
+- [Overview](#overview)
+- [Tech stack](#tech-stack)
+- [Getting started](#getting-started)
+- [Scripts](#scripts)
+- [Project structure](#project-structure)
+- [Content & customization](#content--customization)
+- [Testing](#testing)
+- [Deployment](#deployment)
 - [License](#license)
 
-## Project Overview
-Hero Men's Health is a clinic specializing in men's health services, offering hormone optimization, weight loss, hair restoration, and more. The website aims to:
+## Overview
+The site informs visitors about the clinic and converts them into leads. It is a
+multi-page App Router site with a home/landing page plus dedicated pages, all
+driven from a single content config.
 
-- Inform visitors about the clinic’s services.
-- Provide online booking for consultations.
-- Establish brand identity and build trust in the specialists' expertise.
+**Pages**
+- `/` — home (hero, "telehealth backed by a real clinic," how-we-care, featured
+  services, membership, location)
+- `/about` — story + team
+- `/membership` — membership tiers & pricing
+- `/clinic` — the physical Chicago clinic + telehealth model
+- `/how-it-works` — process + FAQ
+- `/services/[slug]` — individual treatment pages
 
-The website follows a single-page (Landing Page) structure with sections such as a hero banner with a CTA, information blocks, service lists, testimonial/logos (if required), and contact information.
+**Services (for men and women)**
+Hormone Optimization (TRT + menopause/hormone balance), Weight Optimization
+(GLP-1), Sexual Health, NAD Therapy, and Aesthetics & Botox.
 
-## Technologies & Requirements
-### Core Technologies:
-- **Next.js** (React framework for SSR and SSG)
+**Lead capture**
+The header **"Contact Hero"** button opens a simple name + email/phone modal that
+posts to `POST /api/contact`.
+
+## Tech stack
+- **Next.js 15** (App Router, React 18)
 - **TypeScript**
-- **Tailwind CSS** (Utility-first CSS framework)
+- **Tailwind CSS** (earth-tone design tokens in `tailwind.config.ts`; Montserrat)
+- **Framer Motion** (animations; overlays are portaled to `document.body`)
+- **Vitest + React Testing Library** (unit/integration tests)
+- **pnpm** package manager; **ESLint + Prettier**; **next-sitemap**
 
-### Development Tools:
-- **pnpm** – Package manager (alternative to npm or yarn)
-- **ESLint & Prettier** – For code formatting and consistency
-- **next-sitemap.config.js** – For sitemap generation
-- **pnpm-lock.yaml** – Dependency version lock
+## Getting started
+Requirements: **Node.js 18+** and **pnpm**.
 
-### System Requirements:
-- **Node.js**: v15.x
-- **pnpm**: Installed globally
-
-## Project Structure
-```
-heromenshealth-chicago/
-├─ node_modules/
-├── public
-│ ├── icons
-│ │ ├── Call.svg │ ├── apple-touch-icon.png │ ├── favicon-96x96.png │ ├── favicon.ico │ ├── favicon.svg │ ├── site.webmanifest │ ├── web-app-manifest-192x192.png │ └── web-app-manifest-512x512.png ├── images │ ├── advantages │ │ ├── adv-1.webp │ │ ├── adv-2.webp │ │ ├── adv-3.webp │ │ └── adv-4.webp │ ├── doctors │ │ ├── doc-1.png │ │ ├── doc-2.png │ │ ├── doc-3.png │ │ └── doc-4.webp │ ├── services │ │ ├── service-1.webp │ │ ├── service-2.webp │ │ ├── service-3.webp │ │ ├── service-4.webp │ │ └── service-5.webp │ ├── box.svg │ ├── columbia.webp │ ├── harvard.webp │ ├── hero-bg.jpg │ ├── journey.webp │ ├── mail.svg │ ├── map.svg │ ├── map.webp │ ├── md-journey.webp │ ├── md-map.png │ ├── md-map.webp │ ├── mob-map.webp │ └── phone.svg ├── background.mp4 ├── file.svg ├── globe.svg ├── next.svg ├── vercel.svg └── window.svg
-├── src
-│ ├── app
-│ │ ├── fonts
-│ │ │ ├── GeistMonoVF.woff
-│ │ │ └── GeistVF.woff
-│ │ ├── favicon.ico
-│ │ ├── globals.css
-│ │ ├── layout.tsx
-│ │ └── page.tsx
-│ ├── components
-│ │ ├── animation
-│ │ │ ├── box-reveal.tsx
-│ │ │ ├── fade-text.tsx
-│ │ │ └── in-view.tsx
-│ │ ├── footer
-│ │ │ └── footer.tsx
-│ │ ├── header
-│ │ │ ├── client-component.tsx
-│ │ │ ├── header-variants.tsx
-│ │ │ ├── header.tsx
-│ │ │ ├── link.tsx
-│ │ │ └── mobile-header.tsx
-│ │ ├── logo
-│ │ │ └── logo.tsx
-│ │ └── ui
-│ │     ├── button.tsx
-│ │     ├── logo.tsx
-│ │     ├── marquee.tsx
-│ │     ├── new-sticky-scroll.tsx
-│ │     ├── sticky-scroll-reveal.tsx
-│ │     └── typography.tsx
-│ ├── features
-│ │ └── booking-modal
-│ │     ├── api
-│ │     │ ├── index.ts
-│ │     │ └── types.ts
-│ │     ├── modal
-│ │     │ └── modal.tsx
-│ │     ├── steps
-│ │     │ ├── call.tsx
-│ │     │ ├── confirm-visit.tsx
-│ │     │ ├── select-date-time.tsx
-│ │     │ ├── select.tsx
-│ │     │ ├── success.tsx
-│ │     │ ├── user-information.tsx
-│ │     │ └── verify-code.tsx
-│ │     ├── ui
-│ │     │ ├── multi-select
-│ │     │ │ ├── index.ts
-│ │     │ │ ├── multi-select-categories.tsx
-│ │     │ │ ├── multi-select-services.tsx
-│ │     │ │ └── types.ts
-│ │     │ ├── button.tsx
-│ │     │ ├── checkbox.tsx
-│ │     │ ─ dialog.tsx
-│ │     │ ├── input.tsx
-│ │     │ ├── label.tsx
-│ │     │ ├── scroll-area.tsx
-│ │     │ └── select.tsx
-│ │     ├── utils
-│ │     │ └── cn.ts
-│ │     ├── booking-modal.tsx
-│ │     ├── config.ts
-│ │     ├── documents.ts
-│ │     ├── style.module.css
-│ │     ├── tailwind.config.ts
-│ │     └── types.ts
-│ ├── hooks
-│ │ └── useActiveSection.tsx
-│ ├── sections
-│ │ ├── about
-│ │ │ └── about.tsx
-│ │ ├── as-seen-on
-│ │ │ └── as-seen-on.tsx
-│ │ ├── choose-us
-│ │ │ ├── advantage-card.tsx
-│ │ │ ├── choose-us.tsx
-│ │ │ └── slider.tsx
-│ │ ├── contact
-│ │ │ └── contact.tsx
-│ │ ├── featured-services
-│ │ │ └── featured-services.tsx
-│ │ ├── hero
-│ │ │ └── hero.tsx
-│ │ ├── journey
-│ │ │ └── journey.tsx
-│ │ ├── partners
-│ │ │ └── partners.tsx
-│ │ └── index.ts
-│ ├── types
-│ │ └── tailwind-custom-utilities.d.ts
-│ └── utils
-│     ├── cn.tsx
-│     └── screen-size.tsx
-├── README.md
-├── components.json
-├── index.js
-├── next-env.d.ts
-├── next-sitemap.config.js
-├── next.config.ts
-├── package.json
-├── pnpm-lock.yaml
-├── postcss.config.mjs
-├── tailwind.config.ts
-├── tailwindcss.d.ts
-└── tsconfig.json
-```
-
-### Key Directories:
-- **public/** – Stores static files like images, icons, and videos.
-- **src/app/** – Entry point for Next.js (layout.tsx, page.tsx, global styles).
-- **src/components/** – Organized UI components.
-- **src/features/** – Booking modal logic, APIs, and utilities.
-- **src/hooks/** – Custom React hooks.
-- **src/sections/** – Landing page sections.
-- **src/types/** – TypeScript type definitions.
-- **src/utils/** – Utility functions.
-
-
-### Install dependencies:
-Using **pnpm**:
 ```bash
-pnpm install
+pnpm install        # if pnpm is missing: npm install -g pnpm
+pnpm dev            # http://localhost:3020
 ```
-If **pnpm** is not installed:
+
+Environment variables (`.env`) are optional for local development — the site
+runs without them. The placeholder keys point at a legacy backend that is no
+longer used by the lead flow.
+
+## Scripts
 ```bash
-npm install -g pnpm
-pnpm install
+pnpm dev       # dev server on port 3020
+pnpm build     # production build
+pnpm start     # serve the production build (port 3016)
+pnpm test      # run the Vitest suite
+pnpm lint      # eslint --fix
+pnpm format    # prettier --write
 ```
 
-### Configure environment variables:
-Create a `.env` file in the root directory and add necessary variables:
-```ini
-NEXT_PUBLIC_WEB100NOW_API='https://dev.web100now.com/clients-web100now'
-NEXT_PUBLIC_X_API_KEY='ХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХ'
-# Additional variables
+## Project structure
 ```
-Ensure **Node.js (15.x or later)** and **pnpm** are installed.
+src/
+├─ app/                     # App Router: pages, layout, /api routes
+│  ├─ page.tsx              # home page composition
+│  ├─ about | membership | clinic | how-it-works
+│  ├─ services/[slug]       # dynamic treatment pages
+│  └─ api/contact/route.ts  # lead-capture endpoint
+├─ components/
+│  ├─ header/               # Header, SiteMenu (menu overlay), QuickContactModal
+│  ├─ faq/                  # FAQ accordion
+│  └─ ui/                   # Button, CallbackButton, StockPhotoBadge, etc.
+├─ sections/                # landing sections (hero, differentiator,
+│                           # care-approach, featured-services, clinic-gallery,
+│                           # membership-teaser, contact, …)
+├─ data/structure.ts        # ⭐ single source of truth for all page content/SEO
+├─ api/                     # types + apollo client (legacy)
+└─ test/setup.ts            # Vitest setup (jsdom + mocks)
+docs/                       # PROJECT_BRIEF, STATUS, IMAGE_CREDITS
+public/image/services/<slug>/  # per-treatment photos
+```
 
-## Running & Building
-### Development mode:
+## Content & customization
+- **All page content + SEO** lives in `src/data/structure.ts` (headers, hero,
+  per-service copy/benefits/FAQ, contact, documents). Edit there to change copy.
+- **Design tokens** (colors, fonts) are in `tailwind.config.ts`.
+- **Imagery:** the treatment photos are **free Unsplash placeholders** (diverse,
+  men and women) marked with a "Stock · replace" badge. Replace files in
+  `public/image/services/<slug>/` (same filenames) with your own. Details +
+  the legal note are in `docs/IMAGE_CREDITS.md`. Hide the badges by setting
+  `SHOW_STOCK_PHOTO_BADGE = false` in `src/components/ui/StockPhotoBadge.tsx`.
+- **Open placeholder items** (membership pricing, team bios, women's medical
+  copy, real clinic photos) are tracked in `docs/STATUS.md`.
+
+## Testing
 ```bash
-pnpm dev
+pnpm test
 ```
-The site will be available at `http://localhost:3000`.
+Vitest + React Testing Library cover the key UX flows — the Contact Hero modal
+(validation + submit), the Menu overlay (open/close, links), CallbackButton, the
+Featured Services grid, and the `/api/contact` handler.
 
-### Build for production:
-```bash
-pnpm build
-```
-This generates an optimized Next.js build.
+## Deployment
+Hosted on **Vercel**. Pushing to `main` and running `vercel --prod` deploys to
+the stable alias **https://hero-concierge-health.vercel.app** (which always
+points at the latest production build).
 
-### Start production server:
-```bash
-pnpm start
-```
-Runs the built application on the specified port (default: 3000).
-
-
-## Customization & Extensions
-### Adding New Sections:
-Create a new folder in `src/sections/` for each entity (e.g., `partners/`, `testimonials/`). Organize related components inside for modularity.
-
-### Modifying Styles:
-Customize **tailwind.config.ts** for themes, colors, fonts, and additional utilities.
-Use **CSS Modules** or global styles when necessary.
-
-### API Integration:
-The `features/booking-modal/api` directory handles API interactions (e.g., booking confirmations). Implement security measures such as **JWT, cookies, OAuth** if needed.
-
-### SEO & Sitemap:
-Modify `next-sitemap.config.js` to generate a proper `sitemap.xml` and `robots.txt`.
-
-
-
-```
-© 2025, All rights reserved by Hero Men’s Health.
+## License
+© 2026, all rights reserved by Hero Concierge Health.
 This code may not be redistributed without explicit permission from the owners.
