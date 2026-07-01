@@ -69,13 +69,13 @@ export default function Home() {
     keywords: "concierge medicine Chicago, hormone optimization men and women, menopause Chicago, GLP-1 weight loss, NAD therapy, sexual health, aesthetics botox, telehealth Chicago, concierge clinic",
     ogTitle: "Hero Concierge Health | Chicago Concierge Medicine for Men & Women",
     ogDescription: "Concierge care that meets you online and in person. Sign up for a free consultation and enjoy member benefits.",
-    ogImage: "https://heromenshealth.com/images/hero-bg.jpg",
-    ogUrl: "https://heromenshealth.com/",
+    ogImage: "https://hero-concierge-health.vercel.app/images/og-hero-chicago.jpg",
+    ogUrl: "https://hero-concierge-health.vercel.app/",
     twitterCard: "summary_large_image",
     twitterTitle: "Hero Concierge Health | Chicago Concierge Medicine for Men & Women",
     twitterDescription: "Real telehealth backed by an actual Chicago clinic — concierge medicine for men and women.",
-    twitterImage: "https://heromenshealth.com/images/hero-bg.jpg",
-    canonical: "https://heromenshealth.com/",
+    twitterImage: "https://hero-concierge-health.vercel.app/images/og-hero-chicago.jpg",
+    canonical: "https://hero-concierge-health.vercel.app/",
   };
 
   // Set SEO metadata

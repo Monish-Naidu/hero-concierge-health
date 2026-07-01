@@ -10,33 +10,22 @@ import { ApolloProviderWrapper } from '@/components/ApolloProviderWrapper';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://hero-concierge-health.vercel.app'),
   title: 'Hero Concierge Health | Chicago Concierge Medicine for Men & Women',
   description:
     'Hero Concierge Health is a Chicago concierge clinic for men and women. Personalized, telehealth-backed care from a real local medical team, with hormone optimization, weight management, longevity, sexual health, and aesthetics.',
   openGraph: {
     type: 'website',
-    url: 'https://heromenshealth.com/',
+    url: 'https://hero-concierge-health.vercel.app/',
     title: 'Hero Concierge Health | Chicago Concierge Medicine for Men & Women',
     description:
       'Concierge medicine for men and women in Chicago. Hero Concierge Health blends a real local clinic with seamless telehealth so you get attentive, personalized care, from hormone optimization and weight management to longevity, sexual health, and aesthetics.',
     images: [
       {
-        url: 'https://heromenshealth.com/images/hero-bg.jpg',
+        url: '/images/og-hero-chicago.jpg',
         width: 1200,
         height: 630,
-        alt: 'Concierge medicine for men and women in Chicago',
-      },
-      {
-        url: 'https://heromenshealth.com/images/services/service-1.webp',
-        width: 800,
-        height: 600,
-        alt: 'Meet Our Expert Clinicians',
-      },
-      {
-        url: 'https://heromenshealth.com/images/services/service-2.webp',
-        width: 800,
-        height: 600,
-        alt: 'Our Featured Services',
+        alt: 'Dr. Rishi Gaiha, MD — Hero Concierge Health, a concierge clinic in Chicago',
       },
     ],
     siteName: 'Hero Concierge Health',
@@ -46,12 +35,12 @@ export const metadata: Metadata = {
     title: 'Hero Concierge Health | Chicago Concierge Medicine for Men & Women',
     description:
       'Concierge medicine for men and women in Chicago, backed by a real local clinic and seamless telehealth. Personalized care for hormones, weight, longevity, sexual health, and aesthetics.',
-    images: ['https://heromenshealth.com/images/hero-bg.jpg'],
+    images: ['/images/og-hero-chicago.jpg'],
     site: '@HeroConcierge',
     creator: '@HeroConcierge',
   },
   alternates: {
-    canonical: 'https://heromenshealth.com/',
+    canonical: 'https://hero-concierge-health.vercel.app/',
   },
 };
 
