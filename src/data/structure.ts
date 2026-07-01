@@ -339,7 +339,7 @@ export const structureData: StructureData = {
   "home": {
     "slug": "/",
     "hero": {
-      "video": "/videos/main-page.mp4",
+      "video": "/videos/clinic-tour.mp4",
       "title": "Concierge Health,",
       "short_title": "Done Right",
       "subtitle": "Hero Concierge Health is Chicago’s premier concierge health group for men and women — real telehealth backed by an actual clinic in Lakeview. One team, one place for hormone optimization, weight loss, sexual health, NAD therapy, and aesthetics.",
@@ -360,7 +360,7 @@ export const structureData: StructureData = {
             "subtitle1": "FREE Lab Panel",
             "subtitle2": "$99",
             "subtitle3": "For New Patients to Sign Up",
-            "image": "/images/placeholders/doctor-placeholder.svg"
+            "image": "/images/doctors/rishi-gaiha.webp"
           }
         ]
       },

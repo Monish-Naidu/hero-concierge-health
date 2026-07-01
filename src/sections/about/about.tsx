@@ -89,24 +89,15 @@ export const AboutSection = ({
                 backgroundBlendMode: 'overlay, normal',
               }}
             >
-              <div className="absolute inset-x-0 bottom-0 flex justify-center">
-                <FadeText
-                  framerProps={{
-                    show: { transition: { delay: 0.5, duration: 0.8, ease: 'easeOut' } },
-                  }}
-                  direction="up"
-                  className="block"
-                  content={
-                    <Image
-                      src={offers[0]?.image || '/images/doctors/doc-4.webp'}
-                      width={460}
-                      height={460}
-                      alt="Doctor"
-                      className="h-auto w-full object-contain object-bottom"
-                    />
-                  }
-                />
-              </div>
+              <Image
+                src={offers[0]?.image || '/images/doctors/doc-4.webp'}
+                width={600}
+                height={600}
+                alt="Dr. Rishi Gaiha, MD — Anesthesiology & Pain Medicine"
+                className="absolute inset-0 h-full w-full object-cover object-top"
+                priority
+              />
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/45 to-transparent" />
             </div>
 
             {offers && offers.length > 0 && (
@@ -175,23 +166,18 @@ export const AboutSection = ({
                 className="flex justify-center"
                 content={
                   <div className="w-full rounded-[20px] border-[1px] border-white/50 bg-white/95 px-6 py-4 text-center shadow-[0_15px_30px_rgba(0,0,0,0.12)] backdrop-blur-md sm:rounded-[24px] sm:px-10 sm:py-5 lg:px-12 lg:py-6">
-                    {/* TODO: replace with the real clinician's name + credentials */}
                     <Typography
                       variant="h5"
-                      className="w-full text-center whitespace-nowrap font-bold leading-tight text-[#2D2525] text-[18px] sm:text-xl lg:text-3xl"
+                      className="w-full whitespace-nowrap text-center font-bold leading-tight text-[#2D2525] text-[18px] sm:text-xl lg:text-[26px]"
                     >
-                      Your Care Team
+                      Dr. Rishi Gaiha, MD
                     </Typography>
-                    <div className="mt-1 flex items-center justify-center gap-2 sm:mt-2 sm:gap-3">
-                      <div className="h-[1px] w-6 bg-[#A86A45]/30 sm:w-8" />
-                      <Typography
-                        variant="h6"
-                        className="text-center font-bold tracking-[0.15em] text-[#A86A45] text-[12px] sm:text-[14px] md:text-[15px]"
-                      >
-                        BOARD-CERTIFIED
-                      </Typography>
-                      <div className="h-[1px] w-6 bg-[#A86A45]/30 sm:w-8" />
-                    </div>
+                    <p className="mt-1 text-center text-[11px] font-bold uppercase tracking-[0.14em] text-[#A86A45] sm:text-[13px] md:text-[14px]">
+                      Anesthesiology &amp; Pain Medicine
+                    </p>
+                    <p className="mt-0.5 text-center text-[10px] font-semibold text-[#2D2525]/60 sm:text-[12px]">
+                      Board-Certified · Northwestern-Trained
+                    </p>
                   </div>
                 }
               />

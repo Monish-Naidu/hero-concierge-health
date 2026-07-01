@@ -3,19 +3,37 @@
 import { CallbackButton } from '@/components/ui/CallbackButton';
 import { cn } from '@/utils/cn';
 import { motion } from 'framer-motion';
-import { Building2, Stethoscope, MapPin, ArrowRight, type LucideIcon } from 'lucide-react';
+import { MapPin, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 /**
  * "Visit our Chicago clinic" — emphasizes the real, in-person physical clinic.
- * The photo tiles are placeholders; swap each `bg`/caption for a real photo
- * (clinic exterior, exam room, Lakeview street) when available.
- * TODO: replace PhotoTile placeholders with real clinic photography.
+ * These are the clinic's own photos (Lakeview, 1416 W Belmont Ave).
  */
-const TILES = [
-  { icon: Building2, label: 'Our Lakeview clinic', hint: 'Exterior / reception photo' },
-  { icon: Stethoscope, label: 'Real exam rooms', hint: 'Treatment room photo' },
-  { icon: MapPin, label: 'In the neighborhood', hint: 'Lakeview street photo' },
+const PHOTOS = [
+  {
+    src: '/images/clinic/clinic-interior.webp',
+    caption: 'Inside our Lakeview clinic',
+    span: true,
+    ratio: 'aspect-[16/10]',
+  },
+  {
+    src: '/images/clinic/clinic-exterior-day.webp',
+    caption: '1416 W Belmont Ave',
+    ratio: 'aspect-square',
+  },
+  {
+    src: '/images/clinic/clinic-recovery.webp',
+    caption: 'Recovery & training',
+    ratio: 'aspect-square',
+  },
+  {
+    src: '/images/clinic/clinic-exterior-dusk.webp',
+    caption: 'In the heart of Lakeview',
+    span: true,
+    ratio: 'aspect-[16/10]',
+  },
 ];
 
 export function ClinicGallery() {
@@ -59,11 +77,16 @@ export function ClinicGallery() {
             </div>
           </div>
 
-          {/* Right: photo tiles (placeholders) */}
+          {/* Right: real clinic photos */}
           <div className="grid grid-cols-2 gap-3 bg-sand/40 p-5 sm:gap-4 sm:p-8 lg:p-10">
-            <PhotoTile {...TILES[0]} className="col-span-2 aspect-[16/10]" />
-            <PhotoTile {...TILES[1]} className="aspect-square" />
-            <PhotoTile {...TILES[2]} className="aspect-square" />
+            {PHOTOS.map((photo, i) => (
+              <PhotoTile
+                key={photo.src}
+                {...photo}
+                priority={i === 0}
+                className={cn(photo.span && 'col-span-2', photo.ratio)}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -72,15 +95,15 @@ export function ClinicGallery() {
 }
 
 function PhotoTile({
-  icon: Icon,
-  label,
-  hint,
+  src,
+  caption,
   className,
+  priority,
 }: {
-  icon: LucideIcon;
-  label: string;
-  hint: string;
+  src: string;
+  caption: string;
   className?: string;
+  priority?: boolean;
 }) {
   return (
     <motion.div
@@ -89,15 +112,22 @@ function PhotoTile({
       viewport={{ once: true, margin: '0px 0px -40px 0px' }}
       transition={{ duration: 0.4 }}
       className={cn(
-        'flex flex-col items-center justify-center rounded-[20px] border border-dashed border-accent/35 bg-gradient-to-br from-cream to-sand/70 p-4 text-center',
+        'group relative overflow-hidden rounded-[20px] border border-sand shadow-[0_8px_24px_rgba(45,37,37,0.08)]',
         className
       )}
     >
-      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent-deep">
-        <Icon size={22} />
+      <Image
+        src={src}
+        alt={caption}
+        fill
+        sizes="(max-width: 1024px) 50vw, 25vw"
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+        priority={priority}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/0 to-transparent" />
+      <span className="absolute inset-x-3 bottom-3 text-[12px] font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)] sm:text-[13px]">
+        {caption}
       </span>
-      <p className="mt-3 text-[14px] font-semibold text-ink">{label}</p>
-      <p className="mt-0.5 text-[12px] text-taupe">{hint}</p>
     </motion.div>
   );
 }
