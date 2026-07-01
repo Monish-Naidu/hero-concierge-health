@@ -10,7 +10,16 @@ import {
   Mail,
   MapPin,
   Phone,
+  Play,
 } from 'lucide-react';
+import Image from 'next/image';
+
+const CLINIC_PHOTOS = [
+  { src: '/images/clinic/clinic-interior.webp', caption: 'Inside our clinic' },
+  { src: '/images/clinic/clinic-exterior-day.webp', caption: '1416 W Belmont Ave' },
+  { src: '/images/clinic/clinic-recovery.webp', caption: 'Recovery & training' },
+  { src: '/images/clinic/clinic-exterior-dusk.webp', caption: 'In the heart of Lakeview' },
+];
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -161,21 +170,66 @@ export default function ClinicPage() {
             </motion.div>
           </div>
 
-          {/* Clinic photo placeholders */}
-          {/* TODO: replace with real clinic interior photos */}
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {[0, 1, 2].map((i) => (
+          {/* Take a look inside — tour video + real clinic photos */}
+          <div className="mt-16">
+            <motion.div {...fadeUp} transition={{ duration: 0.5 }}>
+              <span className="text-[13px] font-semibold uppercase tracking-[0.18em] text-accent-deep">
+                Step Inside
+              </span>
+              <h2 className="mt-4 text-[28px] font-medium leading-[1.15] text-ink sm:text-[40px]">
+                Take a look inside.
+              </h2>
+            </motion.div>
+
+            <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-5 lg:gap-7">
+              {/* Interior tour video (portrait) */}
               <motion.div
-                key={i}
                 {...fadeUp}
-                transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="flex aspect-[4/3] items-center justify-center rounded-[24px] bg-sand"
+                transition={{ duration: 0.5 }}
+                className="relative aspect-[3/4] overflow-hidden rounded-[28px] border border-sand shadow-[0_12px_40px_rgba(45,37,37,0.08)] lg:col-span-2"
               >
-                <span className="text-[14px] font-medium text-taupe">
-                  Clinic photo coming soon
+                <video
+                  className="absolute inset-0 h-full w-full object-cover"
+                  src="/videos/clinic-tour.mp4"
+                  poster="/videos/clinic-tour-poster.webp"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
+                <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-[12px] font-semibold text-white backdrop-blur-sm">
+                  <Play size={12} className="fill-white" /> Clinic tour
+                </span>
+                <span className="absolute inset-x-4 bottom-4 text-[14px] font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
+                  A quick walk through our Lakeview space
                 </span>
               </motion.div>
-            ))}
+
+              {/* Photo grid */}
+              <div className="grid grid-cols-2 gap-4 lg:col-span-3 lg:gap-6">
+                {CLINIC_PHOTOS.map((photo, i) => (
+                  <motion.div
+                    key={photo.src}
+                    {...fadeUp}
+                    transition={{ duration: 0.45, delay: i * 0.08 }}
+                    className="group relative aspect-[4/3] overflow-hidden rounded-[24px] border border-sand shadow-[0_8px_24px_rgba(45,37,37,0.06)]"
+                  >
+                    <Image
+                      src={photo.src}
+                      alt={photo.caption}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 30vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/0 to-transparent" />
+                    <span className="absolute inset-x-3 bottom-3 text-[12px] font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)] sm:text-[13px]">
+                      {photo.caption}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

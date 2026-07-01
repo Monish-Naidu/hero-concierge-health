@@ -34,7 +34,6 @@ export const HeroSection = (props: Props) => {
       <video
         className="absolute left-0 top-0 z-0 h-full w-full object-cover"
         src={video}
-        poster="/videos/clinic-tour-poster.webp"
         autoPlay
         loop
         muted

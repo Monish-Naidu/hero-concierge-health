@@ -3,39 +3,15 @@
 import { CallbackButton } from '@/components/ui/CallbackButton';
 import { cn } from '@/utils/cn';
 import { motion } from 'framer-motion';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight, Play } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 /**
  * "Visit our Chicago clinic" — emphasizes the real, in-person physical clinic.
- * These are the clinic's own photos (Lakeview, 1416 W Belmont Ave).
+ * A short interior tour video (portrait) anchors the panel, flanked by the
+ * clinic's own photos (Lakeview, 1416 W Belmont Ave).
  */
-const PHOTOS = [
-  {
-    src: '/images/clinic/clinic-interior.webp',
-    caption: 'Inside our Lakeview clinic',
-    span: true,
-    ratio: 'aspect-[16/10]',
-  },
-  {
-    src: '/images/clinic/clinic-exterior-day.webp',
-    caption: '1416 W Belmont Ave',
-    ratio: 'aspect-square',
-  },
-  {
-    src: '/images/clinic/clinic-recovery.webp',
-    caption: 'Recovery & training',
-    ratio: 'aspect-square',
-  },
-  {
-    src: '/images/clinic/clinic-exterior-dusk.webp',
-    caption: 'In the heart of Lakeview',
-    span: true,
-    ratio: 'aspect-[16/10]',
-  },
-];
-
 export function ClinicGallery() {
   return (
     <div className="container">
@@ -77,16 +53,32 @@ export function ClinicGallery() {
             </div>
           </div>
 
-          {/* Right: real clinic photos */}
+          {/* Right: interior tour video + real clinic photos */}
           <div className="grid grid-cols-2 gap-3 bg-sand/40 p-5 sm:gap-4 sm:p-8 lg:p-10">
-            {PHOTOS.map((photo, i) => (
-              <PhotoTile
-                key={photo.src}
-                {...photo}
-                priority={i === 0}
-                className={cn(photo.span && 'col-span-2', photo.ratio)}
-              />
-            ))}
+            {/* Tour video — spans two rows on the left */}
+            <VideoTile
+              src="/videos/clinic-tour.mp4"
+              poster="/videos/clinic-tour-poster.webp"
+              caption="Step inside"
+              className="row-span-2"
+            />
+            <PhotoTile
+              src="/images/clinic/clinic-interior.webp"
+              caption="Inside our clinic"
+              priority
+            />
+            <PhotoTile
+              src="/images/clinic/clinic-recovery.webp"
+              caption="Recovery & training"
+            />
+            <PhotoTile
+              src="/images/clinic/clinic-exterior-day.webp"
+              caption="1416 W Belmont Ave"
+            />
+            <PhotoTile
+              src="/images/clinic/clinic-exterior-dusk.webp"
+              caption="In the heart of Lakeview"
+            />
           </div>
         </div>
       </div>
@@ -94,15 +86,18 @@ export function ClinicGallery() {
   );
 }
 
+const tileBase =
+  'group relative overflow-hidden rounded-[20px] border border-sand shadow-[0_8px_24px_rgba(45,37,37,0.08)]';
+const captionCls =
+  'absolute inset-x-3 bottom-3 text-[12px] font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)] sm:text-[13px]';
+
 function PhotoTile({
   src,
   caption,
-  className,
   priority,
 }: {
   src: string;
   caption: string;
-  className?: string;
   priority?: boolean;
 }) {
   return (
@@ -111,10 +106,7 @@ function PhotoTile({
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: '0px 0px -40px 0px' }}
       transition={{ duration: 0.4 }}
-      className={cn(
-        'group relative overflow-hidden rounded-[20px] border border-sand shadow-[0_8px_24px_rgba(45,37,37,0.08)]',
-        className
-      )}
+      className={cn(tileBase, 'aspect-square')}
     >
       <Image
         src={src}
@@ -125,9 +117,44 @@ function PhotoTile({
         priority={priority}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/0 to-transparent" />
-      <span className="absolute inset-x-3 bottom-3 text-[12px] font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)] sm:text-[13px]">
-        {caption}
+      <span className={captionCls}>{caption}</span>
+    </motion.div>
+  );
+}
+
+function VideoTile({
+  src,
+  poster,
+  caption,
+  className,
+}: {
+  src: string;
+  poster: string;
+  caption: string;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.97 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+      transition={{ duration: 0.4 }}
+      className={cn(tileBase, className)}
+    >
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src={src}
+        poster={poster}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/0 to-transparent" />
+      <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
+        <Play size={11} className="fill-white" /> Clinic tour
       </span>
+      <span className={captionCls}>{caption}</span>
     </motion.div>
   );
 }
